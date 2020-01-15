@@ -1,0 +1,1 @@
+int str_len(char string[]);

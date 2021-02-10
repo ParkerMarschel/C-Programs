@@ -1,0 +1,32 @@
+CC = gcc
+DEBUG = -g
+CFLAGS = -Wall -std=c99 -pedantic -c $(DEBUG)
+LFLAGS = -Wall -std=c99 -pedantic $(DEBUG)
+
+sim04 : simMain.o MetaDataAccess.o ConfigAccess.o StringUtils.o simulator_432573.o simtimer.o Log2File.o
+	$(CC) $(LFLAGS) simMain.o MetaDataAccess.o ConfigAccess.o StringUtils.o simulator_432573.o simtimer.o Log2File.o -lpthread -o sim04
+
+simMain.o : simMain.c
+	$(CC) $(CFLAGS) simMain.c
+
+MetaDataAccess.o : MetaDataAccess.c MetaDataAccess.h
+	$(CC) $(CFLAGS) MetaDataAccess.c
+
+ConfigAccess.o : ConfigAccess.c ConfigAccess.h
+	$(CC) $(CFLAGS) ConfigAccess.c
+
+StringUtils.o : StringUtils.c StringUtils.h
+	$(CC) $(CFLAGS) StringUtils.c
+
+simulator_432573.o : simulator_432573.c simulator_432573.h
+	$(CC) $(CFLAGS) simulator_432573.c
+
+simtimer.o : simtimer.c simtimer.h
+	$(CC) $(CFLAGS) simtimer.c
+
+Log2File.o : Log2File.c Log2File.h
+	$(CC) $(CFLAGS) Log2File.c
+
+
+clean:
+	\rm *.o *.lgf *.gz sim04
